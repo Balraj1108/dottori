@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.prova.dottori.dto.DottoreDTO;
 import it.prova.dottori.model.Dottore;
 import it.prova.dottori.service.DottoreService;
+import it.prova.dottori.web.api.exception.DottoreNonDisponibileEsception;
 import it.prova.dottori.web.api.exception.DottoreNotFoundException;
 import it.prova.dottori.web.api.exception.IdNotNullForInsertException;
 import it.prova.dottori.web.api.exception.IdNullForUpdateException;
@@ -62,5 +63,18 @@ public class DottoreController {
 			throw new DottoreNotFoundException("nessun dottore trovato");
 		
 		dottoreService.rimuovi(id);
+	}
+	
+	@GetMapping("/verifica/{cd}")
+	public DottoreDTO verificaDisponibilitaDottore(@PathVariable(required = true) String cd) {
+		Dottore result = dottoreService.verificaDisponibilita(cd);
+		
+		if(result == null)
+			throw new DottoreNotFoundException("dottore non trovato");
+		
+		if(!result.isInServizio() || result.isInVisita())
+			throw new DottoreNonDisponibileEsception("dottore non disponibile");
+		
+		return DottoreDTO.buildDottoreDTOFromModel(result);
 	}
 }

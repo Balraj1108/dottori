@@ -17,4 +17,7 @@ public List<Dottore> listAll();
 	public void inserisciNuovo(Dottore dottoreInstance);
 	
 	public void rimuovi(Long idToRemove);
+	
+	public Dottore verificaDisponibilita(String codiceDottore);
+	
 }

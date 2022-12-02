@@ -25,12 +25,20 @@ public class DottoriApplication implements CommandLineRunner {
 				.nome("bal")
 				.cognome("singh")
 				.codiceDottore("123")
+				.inVisita(false)
 				.build());
 		
 		dottoreService.inserisciNuovo(Dottore.builder()
 				.nome("mario")
 				.cognome("rossi")
 				.codiceDottore("321")
+				.inVisita(false)
+				.build());
+		dottoreService.inserisciNuovo(Dottore.builder()
+				.nome("ciao")
+				.cognome("come")
+				.codiceDottore("456")
+				.inVisita(true)
 				.build());
 	}
 

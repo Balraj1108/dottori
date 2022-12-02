@@ -37,7 +37,7 @@ public class DottoreServiceImpl implements DottoreService {
 	@Override
 	public void inserisciNuovo(Dottore dottoreInstance) {
 		dottoreInstance.setInServizio(true);
-		dottoreInstance.setInVisita(false);
+		dottoreInstance.setInVisita(dottoreInstance.isInVisita());
 		dottoreRepository.save(dottoreInstance);
 	}
 
@@ -45,4 +45,11 @@ public class DottoreServiceImpl implements DottoreService {
 	public void rimuovi(Long idToRemove) {
 		dottoreRepository.deleteById(idToRemove);
 	}
+
+	@Override
+	public Dottore verificaDisponibilita(String codiceDottore) {
+		
+		return dottoreRepository.verifyDisponibilita(codiceDottore);
+	}
+
 }
