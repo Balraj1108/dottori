@@ -20,4 +20,9 @@ public List<Dottore> listAll();
 	
 	public Dottore verificaDisponibilita(String codiceDottore);
 	
+	public Dottore cercaPerCodiceFiscale(String codiceFiscale);
+	
+	public Dottore impostaDottore(Dottore dottore);
+	
+	public Dottore ricovera(Dottore dottore);
 }

@@ -52,4 +52,24 @@ public class DottoreServiceImpl implements DottoreService {
 		return dottoreRepository.verifyDisponibilita(codiceDottore);
 	}
 
+	@Override
+	public Dottore cercaPerCodiceFiscale(String codiceFiscale) {
+		return dottoreRepository.findByCodFiscale(codiceFiscale);
+	}
+
+	@Override
+	public Dottore impostaDottore(Dottore dottore) {
+		Dottore result = dottoreRepository.verifyDisponibilita(dottore.getCodiceDottore());
+		result.setCodFiscalePazienteAttualmenteInVisita(dottore.getCodFiscalePazienteAttualmenteInVisita());
+		return dottoreRepository.save(result);
+	}
+
+	@Override
+	public Dottore ricovera(Dottore dottore) {
+		Dottore result = dottoreRepository.verifyDisponibilita(dottore.getCodiceDottore());
+		result.setCodFiscalePazienteAttualmenteInVisita(null);
+		result.setInVisita(false);
+		return dottoreRepository.save(result);
+	}
+
 }
